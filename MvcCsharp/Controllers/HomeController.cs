@@ -22,7 +22,15 @@ namespace MvcCsharp.Controllers
 
         public ActionResult GetHOme()
         {
+            //nreturn View();
+            //return Content("sdfdsfsdf");
+            //return RedirectToAction("Index");
+            //return Json();
+            //return new EmptyResult();
+            //return JavaScript();
             return View();
+            //throw new ArithmeticException("fsdfsdf");
+        
         }
 
 

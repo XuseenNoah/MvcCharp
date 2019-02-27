@@ -8,3 +8,22 @@
 
 @Html.ActionLink("Home", "Index", "Home")
 <a href="~/Home/index" class="btn btn-primary">Home</a>
+<br />
+<label class="control-label" id="txt"></label>
+<br />
+<input type="text" id="txtyear" class="form-control" />
+
+
+@section scripts{
+    <script>
+        $('#txtyear').on('keyup', function () {
+
+            var text = $('#txtyear').val();
+
+            document.getElementById('txt').innerHTML = text;
+
+
+        });
+    </script>
+    
+    }
