@@ -26,12 +26,14 @@ namespace MvcCsharp.Models
             }
         }
 
-        internal object ListPerson()
+        internal object ListPerson(string CustomerName)
         {
             using (var conn = new SqlConnection(dbconn))
             using (var cmd = conn.CreateCommand())
             {
-                cmd.CommandText = @"SELECT *FROM Persons";
+                cmd.CommandText = @"SELECT *FROM Persons WHERE NAME LIKE @Search Or Phone LIKE @Phone";
+                cmd.Parameters.AddWithValue("@Phone", CustomerName + "%%");
+                cmd.Parameters.AddWithValue("@Search", CustomerName+"%%");
                 conn.Open();
                 var reader = cmd.ExecuteReader();
                 var listPersons = new List<Persons>();

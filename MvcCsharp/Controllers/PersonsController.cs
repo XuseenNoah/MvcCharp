@@ -33,9 +33,9 @@ namespace MvcCsharp.Controllers
             return View();
         }
 
-        public ViewResult ListPersons()
+        public ViewResult ListPersons(string CustomerName)
         {
-            var getListPerson = _repo.ListPerson();
+            var getListPerson = _repo.ListPerson(CustomerName);
             return View(getListPerson);
         }
     }
