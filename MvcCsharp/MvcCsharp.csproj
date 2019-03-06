@@ -198,6 +198,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\GetHOme.cshtml" />
     <Content Include="Views\Persons\CreatePerson.cshtml" />
+    <Content Include="Views\Persons\ListPersons.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

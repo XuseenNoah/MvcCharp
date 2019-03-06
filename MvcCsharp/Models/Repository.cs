@@ -25,5 +25,30 @@ namespace MvcCsharp.Models
                 cmd.ExecuteNonQuery();
             }
         }
+
+        internal object ListPerson()
+        {
+            using (var conn = new SqlConnection(dbconn))
+            using (var cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = @"SELECT *FROM Persons";
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                var listPersons = new List<Persons>();
+                while (reader.Read())
+                {
+                    var person = new Persons();
+                    person.Id = (int)reader["Id"];
+                    person.Name = reader["Name"] as string;
+                    person.Addres = reader["Addres"]as string;
+                    person.Phone = reader["Phone"]as string;
+                    person.Date = (DateTime)reader["Date"];
+                    listPersons.Add(person);
+
+                }
+                return listPersons;
+             
+            }
+        }
     }
 }

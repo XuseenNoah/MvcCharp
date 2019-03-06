@@ -9,7 +9,7 @@ namespace MvcCsharp.ViewModels
     public class Persons
     {
         public int Id { get; set; }
-        [Required]
+        [Required,StringLength(10,ErrorMessage ="Waxad galisay way ka badan tahay 10")]
         public string Name { get; set; }
         public string Addres { get; set; }
         public string Phone { get; set; }

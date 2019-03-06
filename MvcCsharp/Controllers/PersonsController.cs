@@ -12,7 +12,7 @@ namespace MvcCsharp.Controllers
     {
         Repository _repo = new Repository();
         // GET: Persons
-        [HttpGet]
+       
         public ViewResult CreatePerson()
         {
             return View();
@@ -25,9 +25,18 @@ namespace MvcCsharp.Controllers
             if (ModelState.IsValid)
             {
                 _repo.CreatePerson(persons);
+                TempData["Succes"] = "Succesfly Saved Record";
+                ModelState.Clear();
+                return RedirectToAction("ListPersons");
 
             }
             return View();
+        }
+
+        public ViewResult ListPersons()
+        {
+            var getListPerson = _repo.ListPerson();
+            return View(getListPerson);
         }
     }
 }
