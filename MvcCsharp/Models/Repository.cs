@@ -16,11 +16,10 @@ namespace MvcCsharp.Models
             using (var conn = new SqlConnection(dbconn))
             using (var cmd = conn.CreateCommand())
             {
-                cmd.CommandText = "INSERT INTO Persons VALUES (@Name,@Addres,@Phone,@Date)";
+                cmd.CommandText = "INSERT INTO Persons VALUES (@Name,@Addres,@Phone,getdate())";
                 cmd.Parameters.AddWithValue("@Name", person.Name);
                 cmd.Parameters.AddWithValue("@Addres", person.Addres);
                 cmd.Parameters.AddWithValue("@Phone", person.Phone);
-                cmd.Parameters.AddWithValue("@Date", person.Date);
                 conn.Open();
                 cmd.ExecuteNonQuery();
             }
@@ -50,6 +49,32 @@ namespace MvcCsharp.Models
                 }
                 return listPersons;
              
+            }
+        }
+
+        internal object GetPerson(string id)
+        {
+            using (var conn = new SqlConnection(dbconn))
+            using (var cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = @"SELECT *FROM Persons WHERE Id=@Id";
+                cmd.Parameters.AddWithValue("@Id", id);
+                conn.Open();
+                var reader=cmd.ExecuteReader();
+                Persons person = null;
+                if (reader.Read())
+                {
+                    person = new Persons();
+                    person.Id = (int)reader["Id"];
+                    person.Name = reader["Name"] as string;
+                    person.Addres = reader["Addres"] as string;
+                    person.Phone = reader["Phone"] as string;
+                    person.Date = (DateTime)reader["Date"];
+                    
+
+                }
+                return person;
+
             }
         }
     }

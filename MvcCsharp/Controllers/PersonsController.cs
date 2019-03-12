@@ -38,5 +38,13 @@ namespace MvcCsharp.Controllers
             var getListPerson = _repo.ListPerson(CustomerName);
             return View(getListPerson);
         }
+
+        public ActionResult Details(string id)
+        {
+            
+            var getPerson = _repo.GetPerson(id);
+            if (getPerson == null)ViewBag.NotFound="Ma jiro Qof Idga leh oo ku diwan gashan";
+            return View(getPerson);
+        }
     }
 }
