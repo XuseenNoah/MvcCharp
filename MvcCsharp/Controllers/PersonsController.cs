@@ -41,10 +41,23 @@ namespace MvcCsharp.Controllers
 
         public ActionResult Details(string id)
         {
-            
             var getPerson = _repo.GetPerson(id);
             if (getPerson == null)ViewBag.NotFound="Ma jiro Qof Idga leh oo ku diwan gashan";
             return View(getPerson);
+        }
+
+        //public ActionResult Delete(string id)
+        //{
+        //    var getPerson = _repo.GetPerson(id);
+        //    return View(getPerson);
+        //}
+
+  
+        public ActionResult Delete(string id)
+        {
+            _repo.DeletePerson(id);
+            TempData["SuccesfullyDeleted"] = "Succesfully Deleted";
+            return RedirectToAction(nameof(ListPersons));
         }
     }
 }

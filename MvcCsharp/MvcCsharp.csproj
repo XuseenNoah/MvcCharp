@@ -200,6 +200,7 @@
     <Content Include="Views\Persons\CreatePerson.cshtml" />
     <Content Include="Views\Persons\ListPersons.cshtml" />
     <Content Include="Views\Persons\Details.cshtml" />
+    <Content Include="Views\Persons\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

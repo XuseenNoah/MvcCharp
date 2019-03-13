@@ -52,6 +52,18 @@ namespace MvcCsharp.Models
             }
         }
 
+        internal void DeletePerson(string id)
+        {
+            using (var conn = new SqlConnection(dbconn))
+            using (var cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = @"DELETE FROM Persons WHERE Id=@id";
+                cmd.Parameters.AddWithValue("@id", id);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
         internal object GetPerson(string id)
         {
             using (var conn = new SqlConnection(dbconn))
