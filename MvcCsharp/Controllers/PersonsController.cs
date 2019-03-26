@@ -59,5 +59,11 @@ namespace MvcCsharp.Controllers
             TempData["SuccesfullyDeleted"] = "Succesfully Deleted";
             return RedirectToAction(nameof(ListPersons));
         }
+
+        public ActionResult UpdatePerson(string id)
+        {
+            var getPerson = _repo.GetPerson(id);
+            return View(getPerson);
+        }
     }
 }
