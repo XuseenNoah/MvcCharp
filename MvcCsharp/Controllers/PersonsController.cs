@@ -65,5 +65,19 @@ namespace MvcCsharp.Controllers
             var getPerson = _repo.GetPerson(id);
             return View(getPerson);
         }
+
+        [HttpPost]
+        [ActionName("UpdatePerson")]
+        public ActionResult Updated(Persons persons)
+        {
+            if (ModelState.IsValid)
+            {
+                _repo.UpdatePerson(persons);
+                TempData["SuccesfullyUpdated"] = "Succesfully Updated";
+                ModelState.Clear();
+                return RedirectToAction(nameof(ListPersons));
+            }
+            return View(persons);
+        }
     }
 }
