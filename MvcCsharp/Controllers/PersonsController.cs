@@ -59,5 +59,33 @@ namespace MvcCsharp.Controllers
             TempData["SuccesfullyDeleted"] = "Succesfully Deleted";
             return RedirectToAction(nameof(ListPersons));
         }
+
+        public ActionResult UpdatePerson(string id)
+        {
+            if (id != null)
+            {
+                var getPerson = _repo.GetPerson(id);
+            }
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("UpdatePerson")]
+        public ActionResult Updated(Persons persons)
+        {
+            if (ModelState.IsValid)
+            {
+                _repo.UpdatePerson(persons);
+                TempData["SuccesfullyUpdated"] = "Succesfully UPdated";
+                ModelState.Clear();
+                return RedirectToAction(nameof(ListPersons));
+            }
+            return View(persons);
+        }
+
+
+
+
+
     }
 }
