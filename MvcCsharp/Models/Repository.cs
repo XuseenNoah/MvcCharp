@@ -83,12 +83,28 @@ namespace MvcCsharp.Models
             }
         }
 
+        public void UpdatePerson(Persons persons)
+        {
+            using (var conn = new SqlConnection(dbconn))
+            using (var cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = @"UPDATE Persons SET Name=@Name,Addres=@Addres,Phone=@Phone WHERE Id=@Id  ";
+                cmd.Parameters.AddWithValue("@Name", persons.Name);
+                cmd.Parameters.AddWithValue("@Addres", persons.Addres);
+                cmd.Parameters.AddWithValue("@Phone", persons.Phone);
+                cmd.Parameters.AddWithValue("@Id", persons.Id);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
         internal object GetPerson(string id)
         {
             using (var conn = new SqlConnection(dbconn))
             using (var cmd = conn.CreateCommand())
             {
                 cmd.CommandText = @"SELECT *FROM Persons WHERE Id=@Id";
+                
                 cmd.Parameters.AddWithValue("@Id", id);
                 conn.Open();
                 var reader=cmd.ExecuteReader();

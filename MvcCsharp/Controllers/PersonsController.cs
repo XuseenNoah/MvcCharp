@@ -66,13 +66,18 @@ namespace MvcCsharp.Controllers
             return View(getPerson);
         }
 
-        public ActionResult GetImage(string id)
+        [HttpPost]
+        [ActionName("UpdatePerson")]
+        public ActionResult Updated(Persons persons)
         {
-            var getImage = _repo.GetImage(id);
-            return File(getImage, "Image/jpg");
+            if (ModelState.IsValid)
+            {
+                _repo.UpdatePerson(persons);
+                TempData["SuccesfullyUpdated"] = "Succesfully Updated";
+                ModelState.Clear();
+                return RedirectToAction(nameof(ListPersons));
+            }
+            return View(persons);
         }
-
-
-        
     }
 }
