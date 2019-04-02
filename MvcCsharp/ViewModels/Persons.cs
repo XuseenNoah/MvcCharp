@@ -15,5 +15,22 @@ namespace MvcCsharp.ViewModels
         public string Phone { get; set; }
         [DataType(DataType.Date)]
         public DateTime Date { get; set; }
+
+        public HttpPostedFileBase Image { get; set; }
+
+        public IEnumerable<ValidationResult> validations(ValidationContext validationContext)
+        {
+            if (Image != null)
+            {
+                if (Image.ContentType.Equals("Image/jpeg"))
+                {
+                    yield return new ValidationResult("Only jpg files allowed", new string[] { "Image" });
+                }
+                if (Image.ContentLength >= (4096 * 4096))
+                {
+                    yield return new ValidationResult("Signature must be less than 1mb ", new List<string> { "Image" });
+                }
+            }
+        }
     }
 }

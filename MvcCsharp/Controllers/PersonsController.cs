@@ -65,5 +65,14 @@ namespace MvcCsharp.Controllers
             var getPerson = _repo.GetPerson(id);
             return View(getPerson);
         }
+
+        public ActionResult GetImage(string id)
+        {
+            var getImage = _repo.GetImage(id);
+            return File(getImage, "Image/jpg");
+        }
+
+
+        
     }
 }
