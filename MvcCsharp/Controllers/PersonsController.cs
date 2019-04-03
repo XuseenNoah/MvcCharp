@@ -33,6 +33,12 @@ namespace MvcCsharp.Controllers
             return View();
         }
 
+        public ActionResult GetImage(string id)
+        {
+            var getImage = _repo.GetImage(id);
+            return File(getImage, "Image/jpeg");
+        }
+
         public ViewResult ListPersons(string CustomerName)
         {
             var getListPerson = _repo.ListPerson(CustomerName);
@@ -79,5 +85,8 @@ namespace MvcCsharp.Controllers
             }
             return View(persons);
         }
+
+
+       
     }
 }

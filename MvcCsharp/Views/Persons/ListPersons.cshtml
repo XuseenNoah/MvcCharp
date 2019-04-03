@@ -11,9 +11,9 @@
 @if (TempData["SuccesfullyDeleted"] != null)
 {
     <h3 class="alert alert-success">@TempData["SuccesfullyDeleted"]</h3>
-}@if (TempData["Succes"] != null)
+}@if (TempData["SuccesfullyUpdated"] != null)
 {
-    <h3 class="alert alert-success">@TempData["Succes"]</h3>
+    <h3 class="alert alert-success">@TempData["SuccesfullyUpdated"]</h3>
 }
 
 <br />
@@ -37,6 +37,9 @@
 <table class="table table-bordered table-hover">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.Image)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
@@ -53,25 +56,28 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Addres)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary btn-xs" }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-success btn-xs" }) |
-                @Html.ActionLink("-", "Delete", new { id = item.Id }, new { @class = "glyphicon glyphicon-trash btn-danger btn-xs" })
-            </td>
-        </tr>
+    <tr>
+        <td>
+            <img src="~/Persons/GetImage/@item.Id" class="img-rounded" width="60" height="40" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Addres)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "UpdatePerson", new { id = item.Id }, new { @class = "btn btn-primary btn-xs" }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-success btn-xs" }) |
+            @Html.ActionLink("-", "Delete", new { id = item.Id }, new { @class = "glyphicon glyphicon-trash btn-danger btn-xs" })
+        </td>
+    </tr>
     }
 
 </table>

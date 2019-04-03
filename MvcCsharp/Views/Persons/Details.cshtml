@@ -43,6 +43,15 @@
             @Html.DisplayFor(model => model.Date)
         </dd>
 
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+
+        <dd>
+            <img src="~/Persons/GetImage/@Model.Id" class="img-rounded" width="60" height="40" />
+        </dd>
+
     </dl>
 </div>
 <p>
