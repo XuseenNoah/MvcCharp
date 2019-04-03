@@ -26,9 +26,9 @@ namespace MvcCsharp.ViewModels
                 {
                     yield return new ValidationResult("Only jpg files allowed", new string[] { "Image" });
                 }
-                if(Image.ContentLength >= (4096 * 4096))
+                if (Image.ContentLength >= (4096 * 4096))
                 {
-                    yield return new ValidationResult("Signature must be less than 1mb", new List<string> { "Image" });
+                    yield return new ValidationResult("Signature must be less than 1mb ", new List<string> { "Image" });
                 }
             }
         }

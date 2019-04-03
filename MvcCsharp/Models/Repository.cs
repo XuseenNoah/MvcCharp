@@ -20,25 +20,12 @@ namespace MvcCsharp.Models
                 cmd.Parameters.AddWithValue("@Name", person.Name);
                 cmd.Parameters.AddWithValue("@Addres", person.Addres);
                 cmd.Parameters.AddWithValue("@Phone", person.Phone);
+
                 var bytes = new byte[person.Image.ContentLength];
                 person.Image.InputStream.Read(bytes, 0, person.Image.ContentLength);
                 cmd.Parameters.AddWithValue("@Image", bytes);
-
                 conn.Open();
                 cmd.ExecuteNonQuery();
-            }
-        }
-
-        internal byte[] GetImage(string id)
-        {
-            using (var conn = new SqlConnection(dbconn))
-            using (var cmd = conn.CreateCommand())
-            {
-                cmd.CommandText = @"SELECT IMAGE FROM Persons WHERE Id=@Id";
-                cmd.Parameters.AddWithValue("@Id", id);
-                conn.Open();
-                var reader = cmd.ExecuteScalar() as byte[];
-                return reader;
             }
         }
 
@@ -66,6 +53,21 @@ namespace MvcCsharp.Models
                 }
                 return listPersons;
              
+            }
+        }
+
+        internal byte[] GetImage(string id)
+        {
+            using (var conn = new SqlConnection(dbconn))
+            using (var cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = @"SELECT Image FROM Persons WHERE Id=@Id";
+                cmd.Parameters.AddWithValue("@Id",id);
+                conn.Open();
+
+                var reader = cmd.ExecuteScalar() as byte[];
+                return reader;
+
             }
         }
 
