@@ -10,7 +10,7 @@ namespace MvcCsharp.Controllers
 {
 
 
-    [Authorize(Roles ="Admin",Users ="Husen,Ahmed,Ismacil"]
+    //[Authorize(Roles ="Admin",Users ="Husen,Ahmed,Ismacil")]
     public class PersonsController : Controller
     {
         Repository _repo = new Repository();
@@ -46,7 +46,7 @@ namespace MvcCsharp.Controllers
         public ActionResult DownloadImage(string id)
         {
             var getImage = _repo.GetImage(id);
-            return File(getImage, string.Format("download {0},{1}","Image",".Jpg"));
+            return File(getImage,"Image/jpeg","download.jpg");
         }
 
 
