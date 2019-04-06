@@ -8,11 +8,14 @@ using System.Web.Mvc;
 
 namespace MvcCsharp.Controllers
 {
+
+
+    [Authorize(Roles ="Admin",Users ="Husen,Ahmed,Ismacil"]
     public class PersonsController : Controller
     {
         Repository _repo = new Repository();
         // GET: Persons
-       
+       [AllowAnonymous]
         public ViewResult CreatePerson()
         {
             return View();
@@ -38,6 +41,15 @@ namespace MvcCsharp.Controllers
             var getImage = _repo.GetImage(id);
             return File(getImage, "Image/jpeg");
         }
+
+
+        public ActionResult DownloadImage(string id)
+        {
+            var getImage = _repo.GetImage(id);
+            return File(getImage, string.Format("download {0},{1}","Image",".Jpg"));
+        }
+
+
 
         public ViewResult ListPersons(string CustomerName)
         {
