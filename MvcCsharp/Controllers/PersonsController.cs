@@ -10,7 +10,7 @@ namespace MvcCsharp.Controllers
 {
 
 
-    //[Authorize(Roles ="Admin",Users ="Husen,Ahmed,Ismacil")]
+    [Authorize]
     public class PersonsController : Controller
     {
         Repository _repo = new Repository();
@@ -30,6 +30,7 @@ namespace MvcCsharp.Controllers
                 _repo.CreatePerson(persons);
                 TempData["Succes"] = "Succesfly Saved Record";
                 ModelState.Clear();
+                
                 return RedirectToAction("ListPersons");
 
             }
