@@ -13,34 +13,29 @@ namespace MvcCsharp.Controllers
     {
         Auth_Repository _repo = new Auth_Repository();
         // GET: Account
-       public ActionResult Login(string returnUrl)
+       
+         public ActionResult Login()
         {
-            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
         [HttpPost]
-        public ActionResult Login(Login login,string returnUrl)
+        public ActionResult Login(Login login)
         {
             if (ModelState.IsValid)
             {
-                var user = _repo.Authenticate(login);
-                if (user != null)
+                var User = _repo.Authenticate(login);
+                if (User != null)
                 {
-                    Session["user"] = user;
-                    FormsAuthentication.SetAuthCookie(login.Username, false);
-                    if (!string.IsNullOrEmpty(returnUrl))
-                    {
-                        return Redirect(returnUrl);
-                    }
+                    Session["User"] = User;
                     return RedirectToAction("Index", "Home");
                 }
                 else
                 {
-                    TempData["Error"] = "Error Loggin";
+                    TempData["ErrorLogin"] = "Error Login";
                 }
             }
-                return View(login);
+            return View(login);
         }
 
         public ActionResult Logout()
