@@ -28,6 +28,8 @@ namespace MvcCsharp.Controllers
                 if (User != null)
                 {
                     Session["User"] = User;
+                    Session["Username"] = User.Username;
+                    FormsAuthentication.SetAuthCookie(User.Username, false);
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -40,7 +42,7 @@ namespace MvcCsharp.Controllers
 
         public ActionResult Logout()
         {
-            Session["user"] = null;
+            Session["User"] = null;
             FormsAuthentication.SignOut();
             return RedirectToAction("Login", "Account");
         }

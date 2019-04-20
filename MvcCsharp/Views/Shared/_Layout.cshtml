@@ -26,13 +26,14 @@
                     <li>@Html.ActionLink("HOme2", "GetHome", "Home")</li>
                     <li>@Html.ActionLink("Create Person", "CreatePerson", "Persons")</li>
                     <li>@Html.ActionLink("List Person", "ListPersons", "Persons")</li>
+                    <a href="#">@Session["Username"] </a>
                     @if (User.Identity.IsAuthenticated)
                     {
-                    <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
                     }
                     else
                     {
-                    <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                        <li>@Html.ActionLink("Login", "Login", "Account")</li>
                     }
 
                 </ul>
